@@ -1,0 +1,7 @@
+data
+*.go
+vendor
+main
+*.yaml
+*.lock
+Makefile

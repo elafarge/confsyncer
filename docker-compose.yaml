@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  # Etcd conf sync service
+  syncer:
+    build: ./
+    restart: "no"
+    command: -etcd-endpoint=http://etcd:2379 -kv-prefix=/myconf -location /conf -log-level debug
+    user: ${USER_ID}
+    volumes:
+    - ./data/conf:/conf
+    depends_on:
+    - etcd
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.1.5
+    restart: unless-stopped
+    command: etcd -advertise-client-urls http://etcd:2379 -listen-client-urls http://0.0.0.0:2379 -data-dir /data
+    ports:
+    - 20379:2379
+    volumes:
+    - ./data/etcd:/data

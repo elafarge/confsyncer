@@ -1,0 +1,10 @@
+package: .
+import:
+- package: github.com/coreos/etcd
+  version: ^3.2.0
+  subpackages:
+  - clientv3
+- package: github.com/sirupsen/logrus
+  version: ^1.0.0
+- package: github.com/fsnotify/fsnotify
+  version: ^1.4.0
